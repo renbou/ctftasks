@@ -61,6 +61,7 @@ def encrypt(key, data):
     return result
 
 if __name__ == '__main__':
+    print('~~~task by @renbou~~~)
     signs = [random.getrandbits(1), \
         random.getrandbits(1), random.getrandbits(1), random.getrandbits(1)]
     key = [random.getrandbits(BITS), \

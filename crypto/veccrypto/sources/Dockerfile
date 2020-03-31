@@ -1,22 +1,12 @@
-FROM ubuntu:18.04
+FROM python:3-alpine
 
 MAINTAINER tg: @renbou
 
-RUN apt update -y && apt install -y --no-install-recommends \
-    socat \
-    python3.7 \
-    python3-pip \
-    && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-RUN pip3 install pycryptodome numpy
-RUN mkdir -p /var/veccrypto
+ADD ./app /app
 
-WORKDIR /var/veccrypto
+RUN apk add --no-cache socat
+RUN chmod +x /app/run.sh /app/server.py
 
-ADD secret.py /var/veccrypto/secret.py
-ADD server.py /var/veccrypto/server.py
-
-
-CMD ["socat", "TCP-LISTEN:12345,reuseaddr,fork", "EXEC:\"python3 /var/veccrypto/server.py\""]
+ENTRYPOINT [ "sh", "run.sh" ]
