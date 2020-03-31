@@ -50,8 +50,9 @@ def getblocks(data):
         blocks.append(fourvec(a, [b, c, d]))
     return blocks
 
-
+# вместо sent пишем строку которую мы послали
 sent = pad(b'aaaa')
+# вместо received_sent пишем то, что нам выплюнул сервер на наш запрос зашифровать наши данные
 received_sent = b'JAAAAABdqTQDiwtF+KI9C3TAREIPOtz7w+moJlJM8I+oWSXesqDlXsUkAAAAARjLT1xbk++WTgul/r9dkE04jxRWHg1+j62EiIqDtNx6dOARVSQAAAAANJwILQaPTGcBlTvtmaHzBq658m+HkOe49o3XQZ+HTpffv/74JAAAAAFNlgjAxLMpEXar6E/5hv+Rfy0h39pCatBNw6f7pWBdeva2Ges='
 received_sent = base64.b64decode(received_sent)
 received_vec = getblocks(received_sent)[0]
@@ -60,6 +61,7 @@ sent_vec = fourvec(struct.unpack('i', sent[:4])[0], \
 
 key = received_vec.conj()/sent_vec
 
+# вместо data пишем то что сервер выплюнул на запрос зашифровать флаг
 data = b'JAAAAADFyu7b/EwaSJ7ULae3+i6x2sA/hGBoQ+OcBWhajF3+lYTf/m8kAAAAAUeKAN0vC4rKRO8CrDbE1iKOqd9qqpu46T20ol+SPqj5HRJIyyQAAAAAwoLowBbOhUxgByiTq+041fSWFrPTtaS0VSbzgU+KXcX8QBpQJAAAAAAY6NiA0slim2wEeK1KZv4iflduRV0HMz0EyaUU017dWcOlclMkAAAAAHQU3EAkczssjWORXRExgTI5FVnPbX5QC5tzNaV1Vs5wJy2umCQAAAABKcvzXKOHU8RjG1VoIt8KCjVPrhZp1HFtrizrfVKIp4CkayYpJAAAAADlSXD644DDZC/xQRKpsL3iYRCWiEA2oJVhClUdxsT4Kc0Kef0kAAAAAAshuTWBTp1jd1JONSWvrhDS8Rj64ShdoPttzquU6HDZTIRd9CQAAAAAt1wp1JCd13B3X7m0R/gF+7uuQOuef0r7nGvdPt7mcF84swE6JAAAAAFAIhrsnUqo4rkfzrAHf114iXYo0VWcICpqAHki4k5vPtTAPi0kAAAAANvfnKtUp0mMI2ALOIpZ8G84SM8My6TULL/+9y+U8yn3ECj+bSQAAAAAQPj6bkKL6FHQ01O91wrt6h/07oSbc0hrDhprA4T62hXJXdS1JAAAAADkjx6OsHbjAGwFIT/GJc0T2cGZ0JFpzLjf9kePlXEseRSuSnwkAAAAARFUTL2dtfoYOvYjJMydl2dPsIkulGbwQUMP4z3egfDsSDwtkCQAAAAApopNbrsOcy0qfZGVt9Dg369IGqYgWEfjgKDD6oE+DHy4Z1a7JAAAAAAo3MPXX7uY1ccIzu+VmejOrWgiNCijaIrSr8fVtLqcoKAoUc0='
 data = base64.b64decode(data)
 
