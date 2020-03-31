@@ -1,0 +1,10 @@
+version: "2.0"
+services:
+        veccrypto:
+                build: .
+                ports:
+                        - "61976:12345"
+                restart: on-failure
+                volumes:
+                        - ./server.py:/var/veccrypto/server.py
+                        - ./secret.py:/var/veccrypto/secret.py

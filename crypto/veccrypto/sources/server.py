@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 import numpy as np
 import base64
 import struct
-from Cryptodome.Random import random
+from Crypto.Random import random
 from decimal import *
 from secret import flag
 
@@ -27,6 +28,9 @@ class fourvec():
         return fourvec(self.a*other.a+np.dot(self.vec, other.vec), self.a*other.vec-other.a*self.vec+np.cross(self.vec, other.vec))
     def __truediv__(self, other):
         # if A*B = C then C/A = B but C/B =/= A
+        # if A is key and B is data, then C is cipher text
+        # and by doing C/A we get the plaintext back
+        # yay!
         resa = other.inverse().conj()
         return resa.__mul__(self)
 
@@ -82,6 +86,7 @@ if __name__ == '__main__':
             inp = int(input('Your choice: '))
             if inp not in set([1, 2]):
                 print('Invalid choice bruv!')
+                continue
             if inp == 1:
                 print('Here\'s my secret: ')
                 print(encrypt(key, flag))
