@@ -1,0 +1,1 @@
+flag = 'CTF{h0w_th3_h3ll_1s_v3ct0r_mult1pl1c4t1v3_1nv3rs3_3v3n_p0ss1bl3}'
